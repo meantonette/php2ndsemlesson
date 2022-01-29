@@ -3,7 +3,7 @@
 //defining the class:
 class HelloWorld
 {
-    function sayHello($language = 'English')
+    function sayHello($language = 'English') //defaul value
     {
         // This class currently contains no attributes (variables),
         // as those would have been declared before the
