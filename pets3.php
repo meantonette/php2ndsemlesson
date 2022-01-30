@@ -14,7 +14,7 @@ public $name;
 function __construct($pet_name) {
     $this->name = $pet_name;
     //added ••••
-    self::sleep();
+    self::sleep(); //to make the pets all sleep
     }
 
 // • Define the eat() method:
