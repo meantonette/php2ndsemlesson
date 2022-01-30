@@ -94,13 +94,7 @@
     $pet->play();
 
     //added ••••
-<<<<<<< HEAD
     self::sleep(); //to make the pets all sleep
-    }
-=======
-    $pet->eat();
-    $pet->sleep();
->>>>>>> 4097a19cfe04fe768348c693ae26a2cbe0586cf5
 
     unset($dog, $cat, $pet);
     ?>
