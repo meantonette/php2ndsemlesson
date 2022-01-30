@@ -1,84 +1,109 @@
 <!-- to control member access -->
 <!doctype html>
 <html lang="en">
-<head><meta charset="utf8"><title>Visibility</title><link rel="stylesheet" href="style.css"></head><body><?php # Script 5.4 - visibility.php
 
-// •Begin declaring the Test class:
+<head>
+    <meta charset="utf8">
+    <title>Visibility</title>
+    <link rel="stylesheet" href="style.css">
+</head>
 
-class Test {
-public $public = 'public';
-protected $protected = 'protected';
-private $_private = 'private';
+<body><?php # Script 5.4 - visibility.php
 
-// •This class contains three attributes, one of each type.
-// To make things even more obvious, the name and
-// value of each attribute match its visibility.
-// • As a convention, private variable names are often
-// begun with an underscore. This is commonly done in
-// many OOP languages, although it is not required.
-// • Add a printVar() method and complete the class:
+        // •Begin declaring the Test class:
 
-function printVar($var) {
-echo "<p>In Test, \$$var: '{$this->$var}'.</p>";
-}
-}
+        class Test{
+            
+            public $public = 'public'; //equals dapat nakalagay sa tatawagin na string para lumabas ito
+            protected $protected = 'protected';
+            private $_private = 'private';
 
-// • The \$$var will end up printing a dollar sign
-// followed by the value of $var (the argument).
-// The $this->$var code will be evaluated as $this->public, $this->protected, 
-//and $this->private so that it can access the class attributes.
+            // •This class contains three attributes, one of each type.
+            // To make things even more obvious, the name and
+            // value of each attribute match its visibility.
+            // • As a convention, private variable names are often
+            // begun with an underscore. This is commonly done in
+            // many OOP languages, although it is not required.
+            // • Add a printVar() method and complete the class:
 
-// • Create a class that extends Test:
-class LittleTest extends Test {
-function printVar($var) {
-echo "<p>In LittleTest, \$$var: '{$this->$var}'.</p>";
-}
-} // End of LittleTest class.
+            function printVar($var)
+            {
+                echo "<p>In Test, \$$var: '{$this->$var}'.</p>"; //calls $public: 'public'
+            }
+        }
 
-// • The LittleTest class, as an extension of Test, will inherit
-// the $public and $protected attributes. It will not have
-// the $_private attribute, as that variable’s visibility is
-// private, meaning it cannot be inherited.
-// • Create an object of each type:
-$parent = new Test();
-$child = new LittleTest();
+        // • The \$$var will end up printing a dollar sign
+        // followed by the value of $var (the argument).
+        // The $this->$var code will be evaluated as $this->public, $this->protected, 
+        //and $this->private so that it can access the class attributes.
 
-// • Print the current value of the $public variable by
-// calling the printVar() method:
+        // • Create a class that extends Test:
+        class LittleTest extends Test{
+            
+            function printVar($var)
+            {
+                echo "<p>In LittleTest, \$$var: '{$this->$var}'.</p>";
+            }
+        } // End of LittleTest class.
 
-echo '<h1>Public</h1>';
-echo '<h2>Initially...</h2>';
-$parent->printVar('public');
-$child->printVar('public');
+        // • The LittleTest class, as an extension of Test, will inherit
+        // the $public and $protected attributes. It will not have
+        // the $_private attribute, as that variable’s visibility is
+        // private, meaning it cannot be inherited.
+        // • Create an object of each type:
+        $parent = new Test();
+        $child = new LittleTest();
 
-// • Modify the Test $public attribute and reprint:
-echo '<h2>Modifying $parent->public...</h2>';
-$parent->public = 'modified';
-$parent->printVar('public');
-$child->printVar('public');
+        // • Print the current value of the $public variable by
+        // calling the printVar() method:
 
-// • Because $public has public visibility, it can be accessed
-// (and therefore modified) anywhere . You should note
-// that these lines only change the value of
-// the $public attribute in the $parent object.
-// The $child object’s $public variable still has the original
-// value (because the $public attribute is represented as a
-// separate entity in each object).
+        echo '<h1>Public</h1>'; //unang lalabas
+        echo '<h2>Initially...</h2>';
+        $parent->printVar('public'); // public is the string dapat same sa nilaga mo para matawag
+        $child->printVar('public');
 
-// • Repeat Steps 6 and 7 for the protected variable:
+        // • Modify the Test $public attribute and reprint:
+        echo '<h2>Modifying $parent->public...</h2>';
+        $parent->public = 'modified'; //over rides public
+        $child->public = 'modified'; // can over ride child too
+        $parent->printVar('public');
+        $child->printVar('public');
 
-echo '<hr><h1>Protected</h1>';
-echo '<h2>Initially...</h2>';
-$parent->printVar('protected');
-$child->printVar('protected');
-echo '<h2>Attempting to modify $parent->protected...</h2>';
-$parent->protected = 'modified';
-$parent->printVar('protected');
-$child->printVar('protected');
+        // • Because $public has public visibility, it can be accessed
+        // (and therefore modified) anywhere . You should note
+        // that these lines only change the value of
+        // the $public attribute in the $parent object.
+        // The $child object’s $public variable still has the original
+        // value (because the $public attribute is represented as a
+        // separate entity in each object).
 
-unset($parent, $child);
-?>
+        // • Repeat Steps 6 and 7 for the protected variable:
+
+        echo '<hr><h1>Protected</h1>';
+        echo '<h2>Initially...</h2>';
+        $parent->printVar('protected');
+        $child->printVar('protected');
+        echo '<h2>Attempting to modify $parent->protected...</h2>';
+        echo 'error ito';
+        //$parent->protected = 'modified'; //cant modify protected
+        //$child->protected = 'modified';
+        //$parent->printVar('protected');
+        //$child->printVar('protected');
+
+        echo '<hr><h1>Private</h1>';
+        echo '<h2>Initially...</h2>';
+        $parent->printVar('private');
+        $child->printVar('private');
+        echo '<h2>Attempting to modify $parent->private...</h2>';
+        $parent->protected = 'modified'; 
+        $child->protected = 'modified';
+        $parent->printVar('private');
+        $child->printVar('private');
+
+        unset($parent, $child);
+        ?>
 </body>
+
 </html>
 
 <!-- Comment out this line:
