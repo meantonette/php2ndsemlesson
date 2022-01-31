@@ -2,6 +2,8 @@
 // • Begin defining the class:
 class Rectangle
 {
+    use tDebug; //new added to use the traits
+
     // • Declare the attributes:
     // • This class has two attributes: one for the rectangle’s width and another for its
     // height. Both are initialized to 0.
